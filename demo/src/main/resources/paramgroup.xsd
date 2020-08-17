@@ -1,0 +1,179 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://example.com/demo/ws"
+	targetNamespace="http://example.com/demo/ws"
+	xmlns:Q1="http://example.com/demo/ws" elementFormDefault="qualified">
+
+	<xs:element name="getParamInfoRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="paramGroupId" type="xs:int" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getParamInfoResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="paramInfos" type="tns:paramInfos"
+					minOccurs="0" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="paramInfos">
+		<xs:sequence>
+			<xs:element name="paramInfoId" type="xs:int" />
+			<xs:element name="paramInfoName" type="xs:string" />
+			<xs:element name="isdeleted" type="xs:string" />
+			<xs:element name="paramGroupId" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:element name="getParamGroupRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="paramGroupId" type="xs:int" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getParamGroupResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="paramGroups" type="tns:paramGroups"
+					minOccurs="0" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="paramGroups">
+		<xs:sequence>
+			<xs:element name="paramGroupId" type="xs:int" />
+			<xs:element name="paramGroupName" type="xs:string" />
+			<xs:element name="isdeleted" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	
+		<xs:element name="getAllParamGroupRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="RequestMessage" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getAllParamGroupResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="paramGroups" type="tns:paramGroups"
+					minOccurs="0" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="deleteParamGroupRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="paramGroupId" type="xs:int" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="deleteParamGroupResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ResponseMessage" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="deleteParamInfoRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="paramInfoId" type="xs:int" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="deleteParamInfoResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ResponseMessage" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="addParamGroupRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="addParamGroup"
+					type="Q1:paramGroups" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="addParamGroupResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ResponseMessage" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="addParamInfoRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="addParamInfo" type="Q1:paramInfos" />
+				
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="addParamInfoResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ResponseMessage" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="updateParamGroupRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="updateParamGroup"
+					type="Q1:paramGroups" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="updateParamGroupResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ResponseMessage" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="updateParamInfoRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="updateParamInfo"
+					type="Q1:paramInfos" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="updateParamInfoResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ResponseMessage" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+
+
+
+
+
+
+
+
+</xs:schema>

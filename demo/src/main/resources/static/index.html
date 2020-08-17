@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" class="no-js"
+	data-ng-app="app">
+<head>
+<meta http-equiv="Content-Type" content="text/html: charset=UTF-8" />
+
+<script src="/angularjs/lib/angular.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+
+<script src="/angularjs/lib/sweetalert.min.js"></script>
+<script src="/angularjs/scripts/controllers/angularjsCtrl.js"></script>
+<style type="text/css">
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+img {
+	width: 20px;
+	height: 20px;
+}
+</style>
+</head>
+<body>
+
+	<div ng-app="MyApp">
+	
+		<div ng-controller="myFrom" class="container " style="margin-top: 15px;">
+			<form name="addGroup" style="text-align: center;">
+				<label>Enter Name</label><br> Name: <input type="text"
+					name="GroupName" ng-model="GroupName">
+				<button ng-click="mySave()" id="mySave" class="btn btn-primary">Save</button>
+				
+			</form>
+		</div>
+
+		<button ng-click="myExcel()" id="myExcel" class="btn btn-primary">Export Excel</button>
+		<button ng-click="myPdf()" id="myPdf" class="btn btn-primary">Export PDF</button>
+
+		<div ng-controller="MyCtrl" class="container"
+			style="text-align: center; margin-top: 20px;">
+			<h3>PARAMGROUP</h3>
+
+			<table class="table" style="margin-top: 10px;">
+				<tr>
+					<th>Add Info</th>
+					<th>Info</th>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+				<tr ng-repeat="param in paramgroup">
+					<!-- ADD INFO ACTION  -->
+					<td style="width: 10%"><a href="#" id="{{param.paramGroupId}}"
+						ng-click="addInfoItem(param)"> <img
+							src="/angularjs/scripts/img/plus.png">
+					</a></td>
+					<!-- DISPLAY INFO ACTION  -->
+					<td style="width: 10%"><a href="#" id="{{param.paramGroupId}}"
+						ng-click="displayInfoItem(param)"> <img
+							src="/angularjs/scripts/img/register.png">
+					</a></td>
+					<td>{{param.paramGroupId}}</td>
+					<td>{{param.paramGroupName}}</td>
+					<!-- EDIT ACTION  -->
+					<td style="width: 10%"><a href="#" id="{{param.paramGroupId}}"
+						ng-click="editItem(param)"> <img
+							src="/angularjs/scripts/img/edit.png">
+					</a></td>
+
+
+					<!-- DELETE ACTION  -->
+					<td style="width: 10%"><a href="#" id="{{param.paramGroupId}}"
+						ng-click="deleteItem(param.paramGroupId)"> <img
+							src="/angularjs/scripts/img/close.png">
+					</a></td>
+				</tr>
+			</table>
+
+			<div id="formEdit" ng-hide="formEdit">
+				Id: <input type="text" ng-model="editGroupId" ng-disabled="true">
+				Name: <input type="text" name="nameEdit" ng-model="editGroupName">
+				<button ng-click="myEdit()" class="btn btn-primary">Save</button>
+			</div>
+
+			<div id="formAddInfo" ng-hide="formAddInfo">
+				Group Id: <input type="text" ng-model="addGroupId"
+					ng-disabled="true"> Name Info: <input type="text"
+					ng-model="addInfoName">
+				<button ng-click="myInfoAdd()" class="btn btn-primary">Save</button>
+			</div>
+
+
+			<!-- PARAMINFO TABLE -->
+			<div id="tableInfo" ng-hide="tableInfo">
+				<h3>PARAMINFO</h3>
+				<table class="table" style="margin-top: 10px;">
+					<tr>
+
+						<th>ID</th>
+						<th>Name</th>
+						<th>Edit</th>
+						<th>Delete</th>
+
+					</tr>
+					<tr ng-repeat="paramin in paraminfo">
+						<td>{{paramin.paramInfoId}}</td>
+						<td>{{paramin.paramInfoName}}</td>
+						<!-- EDIT ACTION  -->
+						<td style="width: 10%"><a href="#"
+							id="{{paramin.paramInfoId}}" ng-click="editInfoItem(paramin)">
+								<img src="/angularjs/scripts/img/edit.png">
+						</a></td>
+
+
+						<!-- DELETE ACTION  -->
+						<td style="width: 10%"><a href="#"
+							id="{{paramin.paramInfoId}}"
+							ng-click="deleteInfoItem(paramin.paramInfoId)"> <img
+								src="/angularjs/scripts/img/close.png">
+						</a></td>
+					</tr>
+
+				</table>
+			</div>
+
+			<div id="formEditinfo" ng-hide="formEditinfo">
+				Id: <input type="text" ng-model="editInfoId" ng-disabled="true">
+				Name: <input type="text" ng-model="editInfoName">
+				<button ng-click="myInfoEdit()" class="btn btn-primary">Save</button>
+			</div>
+
+		</div>
+
+
+	</div>
+	
+</body>
+
+</html>
