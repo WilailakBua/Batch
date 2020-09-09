@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,6 +26,7 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.jfree.util.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +58,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import net.glxn.qrgen.core.image.ImageType;
+import net.glxn.qrgen.javase.QRCode;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -511,6 +515,19 @@ public class ParamService {
 				
 			 }
 		  }  
+	}
+	
+	public void getBarcode(String text, HttpServletResponse response) throws IOException {
+		  String qrText = text;
+		  Log.info(qrText);
+		  ByteArrayOutputStream out = QRCode.from(qrText).to(ImageType.PNG).withSize(250, 250).stream();
+		  response.setContentType("image/png");
+		  response.setContentLength(out.size());
+		 
+		  OutputStream outStream = response.getOutputStream();
+		  outStream.write(out.toByteArray());
+		  outStream.flush();
+		  outStream.close();
 	}
 
 

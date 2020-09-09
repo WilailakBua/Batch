@@ -1,16 +1,23 @@
 package com.example.demo.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-
+import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
 
-
+import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jfree.util.Log;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,6 +33,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+//import com.example.demo.ZxingBarcodeGenerator;
 import com.example.demo.DAO.ParamDAO;
 import com.example.demo.bean.Paramgroupbean;
 import com.example.demo.bean.Paraminfobean;
@@ -42,6 +50,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import net.glxn.qrgen.core.image.ImageType;
+import net.glxn.qrgen.javase.QRCode;
 import net.sf.jasperreports.engine.JasperExportManager;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -196,6 +206,25 @@ public class WebRestController {
 //	public void deleteinfoid(@PathVariable Long paramInfoId) {	
 //		paramDAO.deleteParamInfo(paramInfoId);
 //	}
+	/*----------------------------------   DAO  ----------------------------------------*/
+	
+	/*----------------------------------   QRCode  ----------------------------------------*/
+	
+	
+//	  @PostMapping(value = "/zxing/qrcode", produces = MediaType.IMAGE_PNG_VALUE)
+//	    public ResponseEntity<BufferedImage> zxingQRCode(@RequestBody String barcode) throws Exception {
+//	        return okResponse(ZxingBarcodeGenerator.generateQRCodeImage(barcode));
+//	    }
+
+	  private ResponseEntity<BufferedImage> okResponse(BufferedImage image) {
+	        return new ResponseEntity<>(image, HttpStatus.OK);
+	    }
+	  
+	  @GetMapping(value = "/zxing/qrcode/{text}", produces = MediaType.IMAGE_PNG_VALUE)
+	    public void zxingQRCode(@PathVariable String text, HttpServletResponse response) throws ServletException, IOException {
+		  paramService.getBarcode(text, response);
+
+	    }
 	
 
 }

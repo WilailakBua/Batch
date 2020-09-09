@@ -310,16 +310,36 @@ app.controller('myFrom', function($scope, $http, $location){
 			
 		}
 
-// window.location.reload(true)
+
     }
 	
+	$scope.myBarcode = function(){
+
+		$http({
+            method: 'GET',
+            url: '/api/zxing/qrcode/' + $scope.barcode,
+        })
+		.then(function(response) {
+			
+			$scope.images=[
+				{ Photo : "http://localhost:8081/api/zxing/qrcode/" + $scope.barcode }
+		]
+//        	$scope.pic = response.data;
+        	console.log(response.data);
+        });
+		
+//		
+
+//		window.location.href = "http://localhost:8081/api/zxing/qrcode/" + $scope.barcode;
+	}
 	
+	// window.location.reload(true)
 	$scope.myExcel = function(){
-		window.location.href ="http://localhost:8081/api/exceldownload";	
+		window.location.href = "http://localhost:8081/api/exceldownload";	
 	}
 	
 	$scope.myPdf = function(){
-		window.location.href ="http://localhost:8081/api/pdf";	
+		window.location.href = "http://localhost:8081/api/pdf";	
 	}
 });
 
